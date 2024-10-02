@@ -1,4 +1,6 @@
-﻿namespace Flow
+﻿using Flow.Views;
+
+namespace Flow
 {
     public partial class App : Application
     {

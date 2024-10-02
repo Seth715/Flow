@@ -3,13 +3,43 @@
     x:Class="Flow.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Flow"
+    xmlns:local="clr-namespace:Flow.Views"
+    xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
     Shell.FlyoutBehavior="Disabled"
     Title="Flow">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+
+    <TabBar>
+        <Tab Title="Home">
+            <ShellContent
+               Title="Home"
+               ContentTemplate="{DataTemplate local:HomePage}"
+               Route="MainPage" />
+        </Tab>
+        <Tab Title="Calendar">
+            <ShellContent
+               Title="Calendar"
+               ContentTemplate="{DataTemplate local:CalendarPage}"
+               Route="CalendarPage" />
+        </Tab>
+        <Tab Title="To-Do-List">
+            <ShellContent
+               Title="To-Do-List"
+               ContentTemplate="{DataTemplate local:To_Do_ListPage}"
+               Route="To_Do_ListPage" />
+        </Tab>
+        <Tab Title="Goals">
+            <ShellContent
+               Title="Goals"
+               ContentTemplate="{DataTemplate local:GoalsPage}"
+               Route="GoalsPage" />
+        </Tab>
+        <Tab Title="Settings">
+            <ShellContent
+               Title="Settings"
+               ContentTemplate="{DataTemplate local:SettingsPage}"
+               Route="SettingsPage" />
+        </Tab>
+    </TabBar>
 
 </Shell>
