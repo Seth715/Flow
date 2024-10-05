@@ -57,7 +57,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\calendar_icon.svg" />
 	  <None Remove="Resources\Images\flow.png" />
+	  <None Remove="Resources\Images\goals_icon.svg" />
+	  <None Remove="Resources\Images\homepage_icon.svg" />
+	  <None Remove="Resources\Images\settings_icon.svg" />
+	  <None Remove="Resources\Images\to_do_list_icon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

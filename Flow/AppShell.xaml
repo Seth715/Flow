@@ -9,34 +9,34 @@
     Title="Flow">
 
 
-    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}"/>
+    <!--<ShellContent ContentTemplate="{DataTemplate local:LoginPage}"/>-->
 
     <TabBar>
-        <Tab Title="Home">
+        <Tab Title="Home" Icon="homepage_icon.svg">
             <ShellContent
                Title="Home"
                ContentTemplate="{DataTemplate local:HomePage}"
                Route="MainPage" />
         </Tab>
-        <Tab Title="Calendar">
+        <Tab Title="Calendar" Icon="calendar_icon.svg">
             <ShellContent
                Title="Calendar"
                ContentTemplate="{DataTemplate local:CalendarPage}"
                Route="CalendarPage" />
         </Tab>
-        <Tab Title="To-Do-List">
+        <Tab Title="To-Do-List" Icon="to_do_list_icon.svg">
             <ShellContent
                Title="To-Do-List"
                ContentTemplate="{DataTemplate local:To_Do_ListPage}"
                Route="To_Do_ListPage" />
         </Tab>
-        <Tab Title="Goals">
+        <Tab Title="Goals" Icon="goals_icon.svg">
             <ShellContent
                Title="Goals"
                ContentTemplate="{DataTemplate local:GoalsPage}"
                Route="GoalsPage" />
         </Tab>
-        <Tab Title="Settings">
+        <Tab Title="Settings" Icon="settings_icon.svg">
             <ShellContent
                Title="Settings"
                ContentTemplate="{DataTemplate local:SettingsPage}"
