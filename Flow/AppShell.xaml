@@ -9,6 +9,8 @@
     Title="Flow">
 
 
+    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}"/>
+
     <TabBar>
         <Tab Title="Home">
             <ShellContent

@@ -4,7 +4,10 @@
              x:Class="Flow.Views.HomePage"
              Title="Home">
     <VerticalStackLayout>
-        <Image Source="flow.png"/>
+        <Image Source="flow.png"
+               WidthRequest="175">
+        </Image>
+
         <Label 
             Text="Welcome to the Home Page!"
             VerticalOptions="Center" 
