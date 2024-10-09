@@ -2,7 +2,8 @@
 
 namespace Flow
 {
-    using CommunityToolkit.Maui;
+    using Flow.ViewModels;
+    using Flow.Views;
 
     public static class MauiProgram
     {
@@ -12,7 +13,7 @@ namespace Flow
             builder
                 .UseMauiApp<App>()
                 // Initialize the .NET MAUI Community Toolkit by adding the below line of code
-                .UseMauiCommunityToolkit()
+                
                 // After initializing the .NET MAUI Community Toolkit, optionally add additional fonts
                 .ConfigureFonts(fonts =>
                 {
@@ -21,6 +22,8 @@ namespace Flow
                 });
 
             // Continue initializing your .NET MAUI App here
+            builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<LoginViewModel>();
 
             return builder.Build();
         }

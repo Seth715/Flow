@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Flow.Views.LoginPage">
+             x:Class="Flow.Views.NewUserPage"
+             Title="SignUpPage">
     <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20" WidthRequest="300">
         <Label 
-            Text="Login to Flow"
-            FontSize="36"
+            Text="Create an Account"
+            FontSize="33"
             FontAttributes="Bold"
             HorizontalOptions="Center"/>
 
         <Entry
-            x:Name="UserIDBtn"
+            Placeholder="First Name"
+            FontSize="16"
+            VerticalOptions="Center" 
+            HorizontalOptions="FillAndExpand" 
+            Margin="0, 10"/>
+
+        <Entry
+            Placeholder="Last Name"
+            IsPassword="True"
+            FontSize="16"
+            VerticalOptions="Center" 
+            HorizontalOptions="FillAndExpand" 
+            Margin="0, 10"/>
+
+        <Entry
             Placeholder="User ID"
             FontSize="16"
             VerticalOptions="Center" 
@@ -18,7 +33,6 @@
             Margin="0, 10"/>
 
         <Entry
-            x:Name="PasswordBtn"
             Placeholder="Password"
             IsPassword="True"
             FontSize="16"
@@ -28,7 +42,7 @@
 
         <Button
             x:Name="LoginBtn"
-            Command="{Binding LoginCommand}"
+            Command="{Binding CreateAccountCommand}"
             Text="Login"
             FontSize="18"
             VerticalOptions="Center" 
@@ -36,21 +50,6 @@
             HeightRequest="50"
             CornerRadius="25"
             Margin="0, 20"/>
-        
-        <Button
-            x:Name="NewUserBtn"
-            Command="{Binding NewUserCommand}"
-            Text="New User?"
-            FontSize="16"
-            BackgroundColor="Transparent"
-            TextColor="#3b82f6"
-            VerticalOptions="Center" 
-            HorizontalOptions="FillAndExpand"
-            HeightRequest="50"
-            CornerRadius="25"
-            BorderColor="Black"
-            BorderWidth="2"
-            Margin="0,10"/>
-        
+
     </VerticalStackLayout>
 </ContentPage>

@@ -8,5 +8,16 @@
             Text="Welcome to the Settings Page!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        
+        <Button
+            x:Name="LoginBtn"
+            Command="{Binding LogoutCommand}"
+            Text="Logout"
+            FontSize="18"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center"
+            HeightRequest="50"
+            CornerRadius="25"
+            Margin="0, 20"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -9,14 +9,15 @@
     Title="Flow">
 
 
-    <!--<ShellContent ContentTemplate="{DataTemplate local:LoginPage}"/>-->
+    <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage"/>
+    <ShellContent ContentTemplate="{DataTemplate local:NewUserPage}" Route="NewUserPage"/>
 
     <TabBar>
         <Tab Title="Home" Icon="homepage_icon.svg">
             <ShellContent
                Title="Home"
                ContentTemplate="{DataTemplate local:HomePage}"
-               Route="MainPage" />
+               Route="HomePage" />
         </Tab>
         <Tab Title="Calendar" Icon="calendar_icon.svg">
             <ShellContent
