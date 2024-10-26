@@ -11,6 +11,7 @@
             HorizontalOptions="Center"/>
 
         <Entry
+            Text="{Binding FirstName}"
             Placeholder="First Name"
             FontSize="16"
             VerticalOptions="Center" 
@@ -18,6 +19,7 @@
             Margin="0, 10"/>
 
         <Entry
+            Text="{Binding LastName}"
             Placeholder="Last Name"
             IsPassword="True"
             FontSize="16"
@@ -26,13 +28,15 @@
             Margin="0, 10"/>
 
         <Entry
-            Placeholder="User ID"
+            Text="{Binding Username}"
+            Placeholder="Username"
             FontSize="16"
             VerticalOptions="Center" 
             HorizontalOptions="FillAndExpand" 
             Margin="0, 10"/>
 
         <Entry
+            Text="{Binding Password}"
             Placeholder="Password"
             IsPassword="True"
             FontSize="16"

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Flow.Views.User_Database"
+             Title="User Database">
+    <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20" WidthRequest="300">
+        <Label 
+            Text="Welcome to the User Databse"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Button
+            Command="{Binding SettingsCommand}"
+            Text="Go back to Settings"
+            FontSize="18"
+            VerticalOptions="Center" 
+            HorizontalOptions="FillAndExpand"
+            HeightRequest="50"
+            CornerRadius="25"
+            Margin="0, 20"/>
+        
+    </VerticalStackLayout>
+</ContentPage>

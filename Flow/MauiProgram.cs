@@ -2,6 +2,7 @@
 
 namespace Flow
 {
+    using Flow.Local_Database;
     using Flow.ViewModels;
     using Flow.Views;
 
@@ -22,8 +23,7 @@ namespace Flow
                 });
 
             // Continue initializing your .NET MAUI App here
-            builder.Services.AddSingleton<LoginPage>();
-            builder.Services.AddSingleton<LoginViewModel>();
+            
 
             return builder.Build();
         }

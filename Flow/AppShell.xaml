@@ -11,6 +11,7 @@
 
     <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage"/>
     <ShellContent ContentTemplate="{DataTemplate local:NewUserPage}" Route="NewUserPage"/>
+    <ShellContent ContentTemplate="{DataTemplate local:User_Database}" Route="User_Database"/>
 
     <TabBar>
         <Tab Title="Home" Icon="homepage_icon.svg">

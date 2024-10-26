@@ -10,6 +10,13 @@ namespace Flow.ViewModels
         {
             await Shell.Current.GoToAsync("//LoginPage", true);
         }
+
+        [RelayCommand]
+
+        async Task ViewDatabaseAsync()
+        {
+            await Shell.Current.GoToAsync("//User_Database", true);
+        }
  
     }
 }
