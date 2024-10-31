@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Flow.Views.User_Database"
+             xmlns:viewmodels="clr-namespace:Flow.ViewModels"
+             x:DataType="viewmodels:User_DatabaseViewModel"
              Title="User Database">
-    <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20" WidthRequest="300">
+<ScrollView>
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Spacing="20" WidthRequest="300">
         <Label 
-            Text="Welcome to the User Databse"
+            Text="Welcome to the User Database"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+            HorizontalOptions="Center"/>
+
+        <Button
+            Command="{Binding RefreshCommand}"
+            Text="Refresh Database"
+            FontSize="18"
+            VerticalOptions="Center" 
+            HorizontalOptions="FillAndExpand"
+            HeightRequest="50"
+            CornerRadius="25"
+            Margin="0, 20"/>
 
         <Button
             Command="{Binding SettingsCommand}"
@@ -18,6 +32,43 @@
             HeightRequest="50"
             CornerRadius="25"
             Margin="0, 20"/>
-        
+
+        <ListView
+        SelectionMode="Single"
+        CachingStrategy="RecycleElement"
+        ItemsSource="{Binding User}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Frame>
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label
+                                        Style="{StaticResource LabelLarge}"
+                                        Text="{Binding FirstNameDB}"
+                                        VerticalOptions="Center" />
+                                        <Label
+                                        Style="{StaticResource LabelLarge}"
+                                        Text="{Binding LastNameDB}"
+                                        VerticalOptions="Center" />
+                                        <Label
+                                        Style="{StaticResource LabelLarge}"
+                                        Text="{Binding UsernameDB}"
+                                        VerticalOptions="Center" />
+                                        <Label
+                                        Style="{StaticResource LabelLarge}"
+                                        Text="{Binding PasswordDB}"
+                                        VerticalOptions="Center" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </VerticalStackLayout>
+</ScrollView>
 </ContentPage>
+ 

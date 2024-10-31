@@ -3,9 +3,9 @@ namespace Flow.Views;
 
 public partial class User_Database : ContentPage
 {
-	public User_Database()
-	{
-		InitializeComponent();
-		BindingContext = new User_DatabaseViewModel();
-	}
+    public User_Database()
+    {
+        InitializeComponent();
+        BindingContext = new User_DatabaseViewModel();
+    }
 }

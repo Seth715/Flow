@@ -21,7 +21,6 @@
         <Entry
             Text="{Binding LastName}"
             Placeholder="Last Name"
-            IsPassword="True"
             FontSize="16"
             VerticalOptions="Center" 
             HorizontalOptions="FillAndExpand" 
@@ -47,7 +46,7 @@
         <Button
             x:Name="LoginBtn"
             Command="{Binding CreateAccountCommand}"
-            Text="Login"
+            Text="Create Account"
             FontSize="18"
             VerticalOptions="Center" 
             HorizontalOptions="FillAndExpand"
