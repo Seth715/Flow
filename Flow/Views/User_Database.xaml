@@ -2,73 +2,68 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:Flow.Models"
              x:Class="Flow.Views.User_Database"
              xmlns:viewmodels="clr-namespace:Flow.ViewModels"
              x:DataType="viewmodels:User_DatabaseViewModel"
              Title="User Database">
-<ScrollView>
-    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Spacing="20" WidthRequest="300">
+    <VerticalStackLayout HorizontalOptions="CenterAndExpand" Spacing="20">
         <Label 
             Text="Welcome to the User Database"
             VerticalOptions="Center" 
             HorizontalOptions="Center"/>
 
-        <Button
-            Command="{Binding RefreshCommand}"
-            Text="Refresh Database"
-            FontSize="18"
-            VerticalOptions="Center" 
-            HorizontalOptions="FillAndExpand"
-            HeightRequest="50"
-            CornerRadius="25"
-            Margin="0, 20"/>
-
-        <Button
-            Command="{Binding SettingsCommand}"
-            Text="Go back to Settings"
-            FontSize="18"
-            VerticalOptions="Center" 
-            HorizontalOptions="FillAndExpand"
-            HeightRequest="50"
-            CornerRadius="25"
-            Margin="0, 20"/>
-
         <ListView
-        SelectionMode="Single"
-        CachingStrategy="RecycleElement"
-        ItemsSource="{Binding User}">
+            ItemsSource="{Binding User}"
+            HasUnevenRows="True"
+            SeparatorVisibility="None">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="model:User">
                     <ViewCell>
-                        <Grid Padding="10">
-                            <Frame>
-                                <StackLayout Orientation="Horizontal">
-                                    <StackLayout VerticalOptions="Center">
-                                        <Label
-                                        Style="{StaticResource LabelLarge}"
-                                        Text="{Binding FirstNameDB}"
-                                        VerticalOptions="Center" />
-                                        <Label
-                                        Style="{StaticResource LabelLarge}"
-                                        Text="{Binding LastNameDB}"
-                                        VerticalOptions="Center" />
-                                        <Label
-                                        Style="{StaticResource LabelLarge}"
-                                        Text="{Binding UsernameDB}"
-                                        VerticalOptions="Center" />
-                                        <Label
-                                        Style="{StaticResource LabelLarge}"
-                                        Text="{Binding PasswordDB}"
-                                        VerticalOptions="Center" />
-                                    </StackLayout>
-                                </StackLayout>
-                            </Frame>
-                        </Grid>
+                        <ViewCell.ContextActions>
+                            <MenuItem
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:User_DatabaseViewModel}}, Path=RemoveCommand}"
+                                CommandParameter="{Binding .}"
+                                Text="Delete"/>
+                        </ViewCell.ContextActions>
+                             <Grid Padding="10">
+                                 <Frame CornerRadius="20"
+                                        HasShadow="True">
+                                     <StackLayout>
+                                        <Label Text="{Binding First_name}"/>
+                                        <Label Text="{Binding Last_name}"/>
+                                        <Label Text="{Binding Username}"/>
+                                        <Label Text="{Binding Password}"/>
+                                     </StackLayout>
+                                 </Frame>
+                             </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+
+        <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center" Spacing="10">
+            <Button
+                Command="{Binding SettingsCommand}"
+                Text="Go back to Settings"
+                FontSize="18"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                HeightRequest="50"
+                CornerRadius="25"
+                Margin="0, 20"/>
+
+            <Button
+                Command="{Binding RefreshCommand}"
+                Text="Refresh Database"
+                FontSize="18"
+                VerticalOptions="Center" 
+                HorizontalOptions="Center"
+                HeightRequest="50"
+                CornerRadius="25"
+                Margin="0, 20"/>
+        </StackLayout>
     </VerticalStackLayout>
-</ScrollView>
 </ContentPage>
  

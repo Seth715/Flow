@@ -7,6 +7,6 @@ public partial class NewUserPage : ContentPage
     public NewUserPage()
     {
         InitializeComponent();
-        BindingContext = new NewUserViewModel();
+        BindingContext = new User_DatabaseViewModel();
     }
 }

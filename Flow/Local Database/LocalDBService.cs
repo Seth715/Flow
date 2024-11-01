@@ -47,5 +47,15 @@ namespace Flow.Local_Database
             var user = await db.Table<User>().ToListAsync();
             return user;
         }
+
+        public static async Task<User> GetUser(int id)
+        {
+            await Init();
+
+            var user = await db.Table<User>()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            return user;
+        }
     }
 }

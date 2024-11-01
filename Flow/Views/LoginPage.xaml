@@ -11,7 +11,7 @@
 
         <Entry
             x:Name="UserIDBtn"
-            Placeholder="User ID"
+            Placeholder="Username"
             FontSize="16"
             VerticalOptions="Center" 
             HorizontalOptions="FillAndExpand" 
