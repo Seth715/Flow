@@ -12,11 +12,9 @@ namespace Flow.ViewModels
         }
 
         [RelayCommand]
-
         async Task ViewDatabaseAsync()
         {
             await Shell.Current.GoToAsync("//User_Database", true);
         }
- 
     }
 }

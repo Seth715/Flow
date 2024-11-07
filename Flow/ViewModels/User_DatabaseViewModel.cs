@@ -11,16 +11,16 @@ namespace Flow.ViewModels
     public partial class User_DatabaseViewModel : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
     {
         [ObservableProperty]
-        private string firstName;
+        private string firstName = string.Empty;
 
         [ObservableProperty]
-        private string lastName;
+        private string lastName = string.Empty;
 
         [ObservableProperty]
-        private string username;
+        private string username = string.Empty;
 
         [ObservableProperty]
-        private string password;
+        private string password = string.Empty;
 
         public ObservableRangeCollection<User> User { get; set; }
         public AsyncCommand RefreshCommand { get; }
@@ -63,10 +63,74 @@ namespace Flow.ViewModels
         }
 
         [RelayCommand]
+        async Task LoginAsync()
+        {
+            var user = await LocalDBService.GetUserByUsername(Username);
+
+            if (string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            {
+                await Shell.Current.DisplayAlert("Error", "All fields are required.", "OK");
+                return;
+            }
+            else if (user == null)
+            {
+                await Shell.Current.DisplayAlert("Error", "Username does not exit.", "OK");
+                
+                Username = string.Empty;
+                Password = string.Empty;
+        
+                return;
+            }
+            else if (user.Password != Password)
+            {
+                await Shell.Current.DisplayAlert("Error", "Incorrect password.", "OK");
+                
+                Password = string.Empty;
+                
+                return;
+            } else 
+            {
+                await Shell.Current.GoToAsync("//HomePage");
+
+                Username = string.Empty;
+                Password = string.Empty;
+            }
+        }
+
+        [RelayCommand]
+        async Task NewUserAsync()
+        {
+            await Shell.Current.GoToAsync("//NewUserPage");
+        }
+
+        [RelayCommand]
         async Task CreateAccountAsync()
         {
+            if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(Username) || string.IsNullOrWhiteSpace(Password))
+            {
+                await Shell.Current.DisplayAlert("Error", "All fields are required.", "OK");
+                return;
+            } 
+
             await LocalDBService.AddUser(first_name: FirstName, last_name: LastName, username: Username, password: Password);
+                        
             await Shell.Current.GoToAsync("//LoginPage");
+
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Username = string.Empty;
+            Password = string.Empty;
+        }
+
+        [RelayCommand]
+        async Task LogoutAsync()
+        {
+            await Shell.Current.GoToAsync("//LoginPage", true);
+
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            Username = string.Empty;
+            Password = string.Empty;
         }
 
         [RelayCommand]

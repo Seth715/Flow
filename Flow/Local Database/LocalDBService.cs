@@ -57,5 +57,12 @@ namespace Flow.Local_Database
 
             return user;
         }
+
+        public static async Task<User> GetUserByUsername(string username)
+        {
+            await Init();
+
+            return await db.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
+        }
     }
 }

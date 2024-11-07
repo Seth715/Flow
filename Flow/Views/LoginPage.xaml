@@ -10,7 +10,7 @@
             HorizontalOptions="Center"/>
 
         <Entry
-            x:Name="UserIDBtn"
+            Text="{Binding Username}"
             Placeholder="Username"
             FontSize="16"
             VerticalOptions="Center" 
@@ -18,7 +18,7 @@
             Margin="0, 10"/>
 
         <Entry
-            x:Name="PasswordBtn"
+            Text="{Binding Password}"
             Placeholder="Password"
             IsPassword="True"
             FontSize="16"
