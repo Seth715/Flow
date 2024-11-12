@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Flow.Local_Database;
+using Flow.ViewModels;
+using Flow.Models;
 
 namespace Flow.ViewModels
 {
@@ -8,6 +11,8 @@ namespace Flow.ViewModels
         [RelayCommand]
         async Task LogoutAsync()
         {
+            UserSessionService.Instance.ClearUser();
+
             await Shell.Current.GoToAsync("//LoginPage", true);
         }
 

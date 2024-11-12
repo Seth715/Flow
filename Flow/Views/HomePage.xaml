@@ -4,6 +4,13 @@
              x:Class="Flow.Views.HomePage"
              Title="Home">
     <VerticalStackLayout>
+        <Label
+            Text="{Binding GreetingText}"
+            FontSize="30"
+            FontAttributes="Bold"
+            HorizontalOptions="Start"
+            Margin="20"/>
+        
         <Image Source="flow.png"
                WidthRequest="175">
         </Image>

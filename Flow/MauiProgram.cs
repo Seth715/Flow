@@ -23,7 +23,7 @@ namespace Flow
                 });
 
             // Continue initializing your .NET MAUI App here
-            
+
 
             return builder.Build();
         }

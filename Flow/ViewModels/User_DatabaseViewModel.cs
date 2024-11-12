@@ -90,6 +90,8 @@ namespace Flow.ViewModels
                 return;
             } else 
             {
+                UserSessionService.Instance.SetUser(user.Id); //-----------new code
+
                 await Shell.Current.GoToAsync("//HomePage");
 
                 Username = string.Empty;
@@ -122,16 +124,16 @@ namespace Flow.ViewModels
             Password = string.Empty;
         }
 
-        [RelayCommand]
-        async Task LogoutAsync()
-        {
-            await Shell.Current.GoToAsync("//LoginPage", true);
-
-            FirstName = string.Empty;
-            LastName = string.Empty;
-            Username = string.Empty;
-            Password = string.Empty;
-        }
+       [RelayCommand]
+       async Task LogoutAsync()
+       {
+           await Shell.Current.GoToAsync("//LoginPage", true);
+       
+           FirstName = string.Empty;
+           LastName = string.Empty;
+           Username = string.Empty;
+           Password = string.Empty;
+       }
 
         [RelayCommand]
         async Task SettingsAsync()
