@@ -6,7 +6,7 @@
         <Label 
             Text="Login to Flow"
             FontSize="36"
-            FontAttributes="Bold"
+            FontFamily="Lemon"
             HorizontalOptions="Center"/>
 
         <Entry

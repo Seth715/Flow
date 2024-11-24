@@ -2,11 +2,54 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Flow.Views.GoalsPage"
+             xmlns:viewmodel="clr-namespace:Flow.ViewModels"
              Title="Goals">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to the Goals Page!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    
+    <Grid RowDefinitions="50, Auto, *"
+         ColumnDefinitions=".75*, .25*"
+         Padding="10"
+         ColumnSpacing="10">
+
+        <!-- Entry for Task -->
+        <Entry Placeholder="Enter Goal"
+              Text="{Binding NewGoal}"  
+              Grid.Row="0"/>
+
+        <!-- Add Task Button -->
+        <Button Text="Add"
+               Command="{Binding AddGoalItemCommand}" 
+               Grid.Row="0"
+               Grid.Column="1"/>
+
+        <!-- CollectionView for To-Do List -->
+        <CollectionView Grid.Row="2" Grid.ColumnSpan="2"
+                       ItemsSource="{Binding GoalItems}">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItems>
+                                <!-- Delete Command -->
+                                <SwipeItem Text="Delete"
+                                          BackgroundColor="Red"
+                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GoalsPageViewModel}}, Path=DeleteCommand}"
+                                          CommandParameter="{Binding .}" />
+                                <!-- Pass the to-do item as the CommandParameter -->
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Grid Padding="0,5">
+                            <Frame>
+                                <!-- Display Task Description -->
+                                <Label Text="{Binding Goal}"  
+                                           FontSize="24"/>
+                            </Frame>
+                        </Grid>
+
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

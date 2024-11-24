@@ -19,6 +19,8 @@ namespace Flow.Local_Database
             await db.CreateTableAsync<User>();
 
             await db.CreateTableAsync<ToDoItem>();
+
+            await db.CreateTableAsync<GoalItem>();
         }
 
         public static async Task AddUser(string first_name, string last_name, string username, string password)
@@ -122,5 +124,63 @@ namespace Flow.Local_Database
                 await db.UpdateAsync(item);
             }
         }
+
+        //-----------goal-stuff--------------------------------------------------------
+
+        public static async Task<IEnumerable<GoalItem>> GetGoalItemsForUser()
+        {
+            await Init();
+
+            int? userId = UserSessionService.Instance.CurrentUserId;
+            if (userId == null)
+            {
+                throw new InvalidOperationException("No user is currently logged in.");
+            }
+
+            return await db.Table<GoalItem>()
+                           .Where(item => item.UserId == userId.Value)
+                           .ToListAsync();
+        }
+        public static async Task AddGoalItem(string goal)
+        {
+            await Init();
+
+            // Get the current user's ID from the session
+            int? userId = UserSessionService.Instance.CurrentUserId;
+            if (userId == null)
+            {
+                throw new InvalidOperationException("No user is currently logged in.");
+            }
+
+            var goalItem = new GoalItem
+            {
+                Goal = goal,
+                IsCompleted = false,
+                UserId = userId.Value // Associate to-do item with the current user
+            };
+
+            await db.InsertAsync(goalItem);
+        }
+
+        public static async Task RemoveGoalItem(int id)
+        {
+            await Init();
+
+            await db.DeleteAsync<GoalItem>(id);
+        }
+
+        public static async Task UpdateGoalItemStatus(int id, bool isCompleted)
+        {
+            await Init();
+
+            var item = await db.Table<GoalItem>().FirstOrDefaultAsync(i => i.Id == id);
+            if (item != null)
+            {
+                item.IsCompleted = isCompleted;
+                await db.UpdateAsync(item);
+            }
+        }
+
+        //-----------------------------------------------------------------------------------
     }
 }
