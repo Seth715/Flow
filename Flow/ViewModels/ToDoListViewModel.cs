@@ -57,7 +57,7 @@ namespace Flow.ViewModels
             NewTask = string.Empty;
 
             // Reload the to-do items
-            LoadToDoItemsForUser();
+            await LoadToDoItemsForUser();
         });
 
         // Command to delete a task
@@ -69,7 +69,7 @@ namespace Flow.ViewModels
             await LocalDBService.RemoveToDoItem(item.Id);
 
             // Reload the to-do items
-            LoadToDoItemsForUser();
+            await LoadToDoItemsForUser();
         });
     }
 }

@@ -1,12 +1,75 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="Flow.Views.CalendarPage"
              Title="Calendar">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to the Calendar Page!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Content>
+        <Grid Padding="10" RowSpacing="10">
+            <!-- Define Rows for Header, Days of Week, and Dates -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- Header -->
+                <RowDefinition Height="Auto"/>
+                <!-- Days of Week -->
+                <RowDefinition Height="*"/>
+                <!-- Calendar Dates -->
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackLayout Orientation="Horizontal" Grid.Row="0" HorizontalOptions="CenterAndExpand" Spacing="10">
+                <Button Text="Prev" Clicked="OnPrevMonthClicked" />
+                <Label x:Name="MonthYearLabel" FontSize="24" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center"/>
+                <Button Text="Next" Clicked="OnNextMonthClicked" />
+            </StackLayout>
+
+            <!-- Days of Week -->
+            <Grid ColumnSpacing="5" Grid.Row="1" RowSpacing="5" HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Sun" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                <Label Text="Mon" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="1" />
+                <Label Text="Tue" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="2" />
+                <Label Text="Wed" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="3" />
+                <Label Text="Thu" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="4" />
+                <Label Text="Fri" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="5" />
+                <Label Text="Sat" HorizontalTextAlignment="Center" FontAttributes="Bold" Grid.Column="6" />
+            </Grid>
+
+            <!-- Dates -->
+            <CollectionView x:Name="CalendarGrid"
+                            Grid.Row="2"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            SelectionMode="None">
+                <!-- ItemsLayout Configuration -->
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="7"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="LightGray" CornerRadius="5" Padding="17" 
+                               Background="LightGoldenrodYellow"
+                               VerticalOptions="FillAndExpand">
+                            <Label Text="{Binding}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Add Event" 
+                    Grid.Row="3" 
+                    HorizontalOptions="CenterAndExpand"  
+                    VerticalOptions="EndAndExpand"
+                    Margin="100"
+                    FontSize="30"/>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

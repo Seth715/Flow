@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="Flow.Views.HomePage"
              Title="Home">
     <VerticalStackLayout>
-        <Label
-            Text="{Binding GreetingText}"
+        <StackLayout Spacing="0">
+            <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMM dd, yyyy}'}" 
+               FontSize="16"
+               FontAttributes="Bold"
+               HorizontalOptions="Start"
+               Margin="20,0"/>
+            
+            <Label Text="{Binding GreetingText}"
             FontSize="30"
             FontAttributes="Bold"
             HorizontalOptions="Start"
-            Margin="20"/>
-        
+            Margin="20,0"/>
+        </StackLayout>
+
         <Image Source="flow.png"
                WidthRequest="175">
         </Image>
