@@ -85,7 +85,7 @@ namespace Flow.Local_Database
                            .Where(item => item.UserId == userId.Value)
                            .ToListAsync();
         }        
-        public static async Task AddToDoItem(string task)
+        public static async Task AddToDoItem(string task, DateTime startTime, DateTime endTime, bool isAllDay)
         {
             await Init();
 
@@ -99,6 +99,9 @@ namespace Flow.Local_Database
             var toDoItem = new ToDoItem
             {
                 Task = task,
+                StartTime = startTime,
+                EndTime = endTime,
+                IsAllDay = isAllDay,
                 IsCompleted = false,
                 UserId = userId.Value // Associate to-do item with the current user
             };
@@ -141,7 +144,7 @@ namespace Flow.Local_Database
                            .Where(item => item.UserId == userId.Value)
                            .ToListAsync();
         }
-        public static async Task AddGoalItem(string goal)
+        public static async Task AddGoalItem(string goal, DateTime startTime, DateTime endTime, bool isAllDay)
         {
             await Init();
 
@@ -155,6 +158,9 @@ namespace Flow.Local_Database
             var goalItem = new GoalItem
             {
                 Goal = goal,
+                StartTime = startTime,
+                EndTime = endTime,
+                IsAllDay = isAllDay,
                 IsCompleted = false,
                 UserId = userId.Value // Associate to-do item with the current user
             };

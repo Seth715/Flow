@@ -17,9 +17,31 @@ namespace Flow.ViewModels
             set => SetProperty(ref _newGoal, value);
         }
 
+        private DateTime _newStartTime;
+        public DateTime NewStartTime
+        {
+            get => _newStartTime;
+            set => SetProperty(ref _newStartTime, value);
+        }
+
+        private DateTime _newEndTime;
+        public DateTime NewEndTime
+        {
+            get => _newEndTime;
+            set => SetProperty(ref _newEndTime, value);
+        }
+
+        private bool _isAllDay;
+        public bool IsAllDay
+        {
+            get => _isAllDay;
+            set => SetProperty(ref _isAllDay, value);
+        }
         public GoalsPageViewModel()
         {
             GoalItems.Clear();
+            NewStartTime = DateTime.Now; // Default start time
+            NewEndTime = DateTime.Now.AddHours(1);
         }
 
         public async Task LoadGoalItemsForUser()
@@ -50,10 +72,13 @@ namespace Flow.ViewModels
             if (string.IsNullOrWhiteSpace(NewGoal)) return;
 
             // Add the new task to the database
-            await LocalDBService.AddGoalItem(NewGoal);
+            await LocalDBService.AddGoalItem(NewGoal, NewStartTime, NewEndTime, IsAllDay);
 
             // Clear the input fields
             NewGoal = string.Empty;
+            NewStartTime = DateTime.Now;
+            NewEndTime = (DateTime.Now.AddHours(1));
+            IsAllDay = false;
 
             // Reload the to-do items
             await LoadGoalItemsForUser();

@@ -5,25 +5,45 @@
              xmlns:viewmodel="clr-namespace:Flow.ViewModels"
              Title="Goals">
     
-    <Grid RowDefinitions="50, Auto, *"
+    <Grid RowDefinitions="50, Auto, Auto, *"
          ColumnDefinitions=".75*, .25*"
          Padding="10"
          ColumnSpacing="10">
 
         <!-- Entry for Task -->
         <Entry Placeholder="Enter Goal"
-              Text="{Binding NewGoal}"  
-              Grid.Row="0"/>
+               Text="{Binding NewGoal}"  
+                Grid.Row="0"/>
 
         <!-- Add Task Button -->
         <Button Text="Add"
-               Command="{Binding AddGoalItemCommand}" 
-               Grid.Row="0"
-               Grid.Column="1"/>
+                Command="{Binding AddGoalItemCommand}" 
+                Grid.Row="0"
+                Grid.Column="1"/>
+
+        <!-- Start Time Picker -->
+        <DatePicker Date="{Binding NewStartTime}"
+                    Grid.Row="1" />
+
+        <!-- End Time Picker -->
+        <DatePicker Date="{Binding NewEndTime}"
+                    Grid.Row="2" />
+
+        <!-- All-Day Switch -->
+        <Label Text="All Day"
+               Grid.Row="1"
+               Grid.Column="1"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"/>
+
+        <Switch IsToggled="{Binding NewIsAllDay}"
+                Grid.Row="2" 
+                Grid.Column="1" 
+                HorizontalOptions="Center"/>
 
         <!-- CollectionView for To-Do List -->
-        <CollectionView Grid.Row="2" Grid.ColumnSpan="2"
-                       ItemsSource="{Binding GoalItems}">
+        <CollectionView Grid.Row="4" Grid.ColumnSpan="2"
+                        ItemsSource="{Binding GoalItems}">
 
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -41,9 +61,23 @@
 
                         <Grid Padding="0,5">
                             <Frame>
-                                <!-- Display Task Description -->
-                                <Label Text="{Binding Goal}"  
-                                           FontSize="24"/>
+                                <StackLayout>
+                                    <!-- Display Task Description -->
+                                    <Label Text="{Binding Goal}"  
+                                           FontSize="20"/>
+
+                                    <!-- Display Start Time -->
+                                    <Label Text="{Binding StartTime, StringFormat='{0:MM/dd/yyyy}'}"
+                                           FontSize="14"/>
+
+                                    <!-- Display End Time -->
+                                    <Label Text="{Binding EndTime, StringFormat='{0:MM/dd/yyyy}'}"
+                                           FontSize="14"/>
+
+                                    <!-- Display All Day -->
+                                    <Label Text="{Binding IsAllDay, Converter={StaticResource BooleanToStringConverter}}"
+                                           FontSize="14"/>
+                                </StackLayout>
                             </Frame>
                         </Grid>
 

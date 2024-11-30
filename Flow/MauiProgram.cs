@@ -2,6 +2,7 @@
 
 namespace Flow
 {
+    using CommunityToolkit.Maui;
     using Flow.Local_Database;
     using Flow.ViewModels;
     using Flow.Views;
@@ -11,10 +12,13 @@ namespace Flow
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
+            
             builder
-                .UseMauiApp<App>()
+
+            .UseMauiApp<App>()
+            .UseMauiCommunityToolkit()
                 // Initialize the .NET MAUI Community Toolkit by adding the below line of code
-                
+
                 // After initializing the .NET MAUI Community Toolkit, optionally add additional fonts
                 .ConfigureFonts(fonts =>
                 {

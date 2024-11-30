@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Flow.Local_Database;
 using Flow.Models;
+using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -18,9 +19,31 @@ namespace Flow.ViewModels
             set => SetProperty(ref _newTask, value);
         }
 
+        private DateTime _newStartTime;
+        public DateTime NewStartTime
+        {
+            get => _newStartTime;
+            set => SetProperty(ref _newStartTime, value);
+        }
+
+        private DateTime _newEndTime;
+        public DateTime NewEndTime
+        {
+            get => _newEndTime;
+            set => SetProperty(ref _newEndTime, value);
+        }
+
+        private bool _isAllDay;
+        public bool IsAllDay
+        {
+            get => _isAllDay;
+            set => SetProperty(ref _isAllDay, value);
+        }
         public ToDoListViewModel()
         {
             ToDoItems.Clear();
+            NewStartTime = DateTime.Now; // Default start time
+            NewEndTime = DateTime.Now.AddHours(1);
         }
 
         public async Task LoadToDoItemsForUser()
@@ -51,10 +74,13 @@ namespace Flow.ViewModels
             if (string.IsNullOrWhiteSpace(NewTask)) return;
 
             // Add the new task to the database
-            await LocalDBService.AddToDoItem(NewTask);
+            await LocalDBService.AddToDoItem(NewTask, NewStartTime, NewEndTime, IsAllDay);
 
             // Clear the input field
             NewTask = string.Empty;
+            NewStartTime = DateTime.Now;
+            NewEndTime =(DateTime.Now.AddHours(1));
+            IsAllDay = false;
 
             // Reload the to-do items
             await LoadToDoItemsForUser();
