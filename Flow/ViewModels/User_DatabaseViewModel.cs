@@ -8,8 +8,9 @@ using Flow.Views;
 
 namespace Flow.ViewModels
 {
+    
     public partial class User_DatabaseViewModel : CommunityToolkit.Mvvm.ComponentModel.ObservableObject
-    {
+    {   
         [ObservableProperty]
         private string firstName = string.Empty;
 

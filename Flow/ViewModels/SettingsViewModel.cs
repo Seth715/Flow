@@ -12,7 +12,7 @@ namespace Flow.ViewModels
         async Task LogoutAsync()
         {
             UserSessionService.Instance.ClearUser();
-
+          
             await Shell.Current.GoToAsync("//LoginPage", true);
         }
 
@@ -20,6 +20,12 @@ namespace Flow.ViewModels
         async Task ViewDatabaseAsync()
         {
             await Shell.Current.GoToAsync("//User_Database", true);
+        }
+
+        [RelayCommand]
+        async Task ProfilePageAsync()
+        {
+            await Shell.Current.GoToAsync("//ProfilePage", true);
         }
     }
 }

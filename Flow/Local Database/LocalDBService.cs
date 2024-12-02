@@ -70,6 +70,13 @@ namespace Flow.Local_Database
             return await db.Table<User>().FirstOrDefaultAsync(u => u.Username == username);
         }
 
+        public static async Task<User> GetUserById(int? userid)
+        {
+            await Init();
+
+            return await db.Table<User>().FirstOrDefaultAsync(u => u.Id == userid);
+        }
+
         //-----------to-do-list-stuff----------------------------------------------------
         public static async Task<IEnumerable<ToDoItem>> GetToDoItemsForUser()
         {
@@ -85,7 +92,7 @@ namespace Flow.Local_Database
                            .Where(item => item.UserId == userId.Value)
                            .ToListAsync();
         }        
-        public static async Task AddToDoItem(string task, DateTime startTime, DateTime endTime, bool isAllDay)
+        public static async Task AddToDoItem(string task, DateTime endTime)
         {
             await Init();
 
@@ -99,9 +106,7 @@ namespace Flow.Local_Database
             var toDoItem = new ToDoItem
             {
                 Task = task,
-                StartTime = startTime,
                 EndTime = endTime,
-                IsAllDay = isAllDay,
                 IsCompleted = false,
                 UserId = userId.Value // Associate to-do item with the current user
             };
@@ -144,7 +149,7 @@ namespace Flow.Local_Database
                            .Where(item => item.UserId == userId.Value)
                            .ToListAsync();
         }
-        public static async Task AddGoalItem(string goal, DateTime startTime, DateTime endTime, bool isAllDay)
+        public static async Task AddGoalItem(string goal, DateTime endTime)
         {
             await Init();
 
@@ -158,9 +163,7 @@ namespace Flow.Local_Database
             var goalItem = new GoalItem
             {
                 Goal = goal,
-                StartTime = startTime,
                 EndTime = endTime,
-                IsAllDay = isAllDay,
                 IsCompleted = false,
                 UserId = userId.Value // Associate to-do item with the current user
             };

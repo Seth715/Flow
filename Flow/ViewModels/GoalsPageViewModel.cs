@@ -72,13 +72,11 @@ namespace Flow.ViewModels
             if (string.IsNullOrWhiteSpace(NewGoal)) return;
 
             // Add the new task to the database
-            await LocalDBService.AddGoalItem(NewGoal, NewStartTime, NewEndTime, IsAllDay);
+            await LocalDBService.AddGoalItem(NewGoal, NewEndTime);
 
             // Clear the input fields
             NewGoal = string.Empty;
-            NewStartTime = DateTime.Now;
             NewEndTime = (DateTime.Now.AddHours(1));
-            IsAllDay = false;
 
             // Reload the to-do items
             await LoadGoalItemsForUser();

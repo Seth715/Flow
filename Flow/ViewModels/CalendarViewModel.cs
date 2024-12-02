@@ -35,41 +35,56 @@ namespace Flow.ViewModels
         public CalendarViewModel()
         {
             // Load calendar events asynchronously
-            Events = new EventCollection();
+            Initialize();
         }
-public async Task LoadCalendarEvents()
+        private async void Initialize()
+        {
+            Events = new EventCollection();
+            await LoadCalendarEvents();
+        }
+        private static IEnumerable<CalendarEvent> GenerateListForDate(IEnumerable<ToDoItem> toDoItems, IEnumerable<GoalItem> goalItems, DateTime specificDate)
+        {
+            // Combine ToDoItems and GoalItems for the specific date
+            var toDoEvents = toDoItems
+                .Where(item => item.EndTime.Date == specificDate) // Filter by the specific date
+                .Select(item => new CalendarEvent
+                {
+                    Title = item.Task,
+                    Description = "Task",
+                    EndTime = item.EndTime.AddHours(1), // Example duration
+                });
+
+            var goalEvents = goalItems
+                .Where(item => item.EndTime.Date == specificDate) // Filter by the specific date
+                .Select(item => new CalendarEvent
+                {
+                    Title = item.Goal,
+                    Description = "Goal",
+                    EndTime = item.EndTime.AddHours(1), // Example duration
+                });
+
+            // Return a combined list of ToDo and Goal events
+            return toDoEvents.Concat(goalEvents);
+        }
+        public async Task LoadCalendarEvents()
         {
             try
             {
+                Events.Clear();
+
                 var toDoItems = await LocalDBService.GetToDoItemsForUser();
                 var goalItems = await LocalDBService.GetGoalItemsForUser();
 
-                foreach (var item in toDoItems)
-                {
-                    var calendarEvent = new CalendarEvent
-                    {
-                        Title = item.Task,
-                        Description = "Task",
-                        StartTime = item.StartTime,
-                        EndTime = item.EndTime.AddHours(1), // Example duration
-                        Color = "Blue"
-                    };
-                    // Add to the EventCollection with DateTime as key
-                    Events.Add(item.EndTime.Date, new List<CalendarEvent> { calendarEvent });
-                }
+                var uniqueDates = toDoItems
+                    .Select(item => item.EndTime.Date)
+                    .Concat(goalItems.Select(item => item.EndTime.Date))
+                    .Distinct()
+                    .OrderBy(date => date) // Optional: Sort the dates
+                    .ToList();
 
-                foreach (var item in goalItems)
+                foreach (var date in uniqueDates)
                 {
-                    var calendarEvent = new CalendarEvent
-                    {
-                        Title = item.Goal,
-                        Description = "Goal",
-                        StartTime = item.StartTime,
-                        EndTime = item.EndTime.AddHours(1), // Example duration
-                        Color = "Green"
-                    };
-                    // Add to the EventCollection with DateTime as key
-                    Events.Add(item.EndTime.Date, new List<CalendarEvent> { calendarEvent });
+                    Events.Add(date, new List<CalendarEvent>(GenerateListForDate(toDoItems, goalItems, date)));
                 }
             }
             catch (Exception ex) 
@@ -77,7 +92,6 @@ public async Task LoadCalendarEvents()
                 Console.WriteLine($"Error loading events: {ex.Message}");
             }
         }
-
        //public void OnEventTapped(CalendarEvent selectedEvent)
        //{
        //    if (selectedEvent == null) return;

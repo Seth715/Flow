@@ -7,16 +7,16 @@
     <VerticalStackLayout>
         <StackLayout Spacing="0">
             <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMM dd, yyyy}'}" 
-               FontSize="16"
-               FontAttributes="Bold"
-               HorizontalOptions="Start"
-               Margin="20,0"/>
+                   FontSize="16"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"
+                   Margin="20,0"/>
             
             <Label Text="{Binding GreetingText}"
-            FontSize="30"
-            FontAttributes="Bold"
-            HorizontalOptions="Start"
-            Margin="20,0"/>
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start"
+                   Margin="20,0"/>
         </StackLayout>
 
         <Image Source="flow.png"
