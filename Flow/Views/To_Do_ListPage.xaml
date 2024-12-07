@@ -1,68 +1,96 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Flow.Views.To_Do_ListPage"
              xmlns:viewmodel="clr-namespace:Flow.ViewModels"
-             Title="To-Do-List">
+             x:Class="Flow.Views.To_Do_ListPage"
+             Title="To-Do List"
+             BackgroundColor="#F4F5FA"
+             Padding="20">
 
-    <Grid RowDefinitions="50, Auto, Auto, *"
-          ColumnDefinitions=".75*, .25*"
-          Padding="10"
-          ColumnSpacing="10">
+    <VerticalStackLayout Spacing="20">
+        <!-- Header -->
+        <StackLayout BackgroundColor="#512BD4" Padding="15" Spacing="5">
+            <Label Text="Your To-Do List"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+            <Label Text="Stay Organized and Track Your Tasks"
+                   FontSize="16"
+                   FontAttributes="Italic"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+        </StackLayout>
 
-        <!-- Entry for Task -->
-        <Entry Placeholder="Enter Task"
-               Text="{Binding NewTask}"  
-               Grid.Row="0"/>
+        <!-- Task Entry Section -->
+        <Grid RowDefinitions="Auto"
+              ColumnDefinitions="3*, 1*"
+              ColumnSpacing="10">
+            <Entry Placeholder="Enter Task"
+                   Text="{Binding NewTask}"
+                   BackgroundColor="White"
+                   FontSize="18"
+                   HeightRequest="50"
+                   Margin="0,10,0,0"
+                   Grid.Column="0" />
 
-        <!-- Add Task Button -->
-        <Button Text="Add"
-                Command="{Binding AddToDoItemCommand}" 
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                Margin="5"/>
+            <Button Text="Add"
+                    Command="{Binding AddToDoItemCommand}"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Grid.Column="1" />
+        </Grid>
 
-        <!-- End Time Picker -->
+        <!-- End Date Picker -->
         <DatePicker Date="{Binding NewEndTime}"
-                    Grid.Row="1" />
-        
-        <!-- CollectionView for To-Do List -->
-        <CollectionView Grid.Row="2" Grid.ColumnSpan="2"
-                        ItemsSource="{Binding ToDoItems}">
+                    BackgroundColor="White"
+                    FontSize="18"
+                    TextColor="#512BD4"
+                    Margin="0,10,0,0"/>
 
-            <CollectionView.ItemTemplate>
+        <!-- To-Do Items List -->
+        <CollectionView ItemsSource="{Binding ToDoItems}"
+                        Margin="0,10,0,0"
+                        BackgroundColor="White"
+                        MaximumHeightRequest="375">
+            <CollectionView.ItemTemplate >
                 <DataTemplate>
                     <SwipeView>
+                        <!-- Swipe Actions -->
                         <SwipeView.RightItems>
-                            <SwipeItems>
-                                <!-- Delete Command -->
+                            <SwipeItems Mode="Execute">
+                                <!-- Delete Button -->
                                 <SwipeItem Text="Delete"
                                            BackgroundColor="Red"
                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ToDoListViewModel}}, Path=DeleteCommand}"
                                            CommandParameter="{Binding .}" />
-                                <!-- Pass the to-do item as the CommandParameter -->
                             </SwipeItems>
                         </SwipeView.RightItems>
 
-                        <Grid Padding="0,5">
-                            <Frame>
+                        <!-- Task Item Content -->
+                        <Grid Padding="10">
+                            <Frame CornerRadius="10"
+                                   BackgroundColor="#F4F5FA"
+                                   HasShadow="True"
+                                   BorderColor="#E0E0E0">
                                 <StackLayout>
-                                    <!-- Display End Time -->
-                                    <Label Text="{Binding EndTime, StringFormat='{0:MM/dd/yyyy}'}"
-                                           FontSize="14"/>
-                                    
-                                    <!-- Display Task Description -->
-                                    <Label Text="{Binding Task}"  
-                                           FontSize="20"/>
+                                    <Label Text="{Binding Task}"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="Black" />
+                                    <Label Text="{Binding EndTime, StringFormat='Due: {0:MM/dd/yyyy}'}"
+                                           FontSize="14"
+                                           TextColor="Gray" />
                                 </StackLayout>
                             </Frame>
                         </Grid>
-
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </Grid>
+    </VerticalStackLayout>
 </ContentPage>
-

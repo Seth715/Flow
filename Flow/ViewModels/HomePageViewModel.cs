@@ -1,10 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Flow.Local_Database;
 using Flow.Models;
 
 namespace Flow.ViewModels
 {
-    public class HomePageViewModel : ObservableObject
+    public partial class HomePageViewModel : ObservableObject
     {
         private User? _currentUser;
         
@@ -42,6 +43,24 @@ namespace Flow.ViewModels
             {
                 GreetingText = "Hello, User";
             }
+        }
+
+        [RelayCommand]
+        async Task CalendarAsync()
+        {
+            await Shell.Current.GoToAsync("//CalendarPage");
+        }
+
+        [RelayCommand]
+        async Task TaskAsync()
+        {
+            await Shell.Current.GoToAsync("//To_Do_ListPage");
+        }
+
+        [RelayCommand]
+        async Task GoalAsync()
+        {
+            await Shell.Current.GoToAsync("//GoalsPage");
         }
     }
 }

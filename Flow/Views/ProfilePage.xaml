@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Flow.Views.ProfilePage"
@@ -6,26 +7,32 @@
              Title="ProfilePage">
 
     <VerticalStackLayout HorizontalOptions="CenterAndExpand" Spacing="20">
+        <!-- Profile Header -->
         <Label Text="Your Profile" 
                FontSize="24" 
+               FontAttributes="Bold" 
                HorizontalOptions="Center" />
 
         <!-- Display Logged-in User's Credentials -->
-        <Frame CornerRadius="20" HasShadow="True" Padding="10">
-            <VerticalStackLayout>
+        <Frame HasShadow="True" Padding="20" HorizontalOptions="CenterAndExpand">
+            <VerticalStackLayout Spacing="5">
                 <!-- Labels for displaying user details -->
-                <Label x:Name="UserIdLabel" Text="User ID: " />
-                <Label x:Name="NameLabel" Text="First Name: " />
-                <Label x:Name="UsernameLabel" Text="Username: " />
-                <Label x:Name="PasswordLabel" Text="Password: " />
+                <Label x:Name="UserIdLabel" Text="User ID: " FontSize="18"/>
+                <Label x:Name="NameLabel" Text="First Name: " FontSize="18"/>
+                <Label x:Name="UsernameLabel" Text="Username: " FontSize="18"/>
+                <Label x:Name="PasswordLabel" Text="Password: " FontSize="18"/>
             </VerticalStackLayout>
         </Frame>
 
         <Button Command="{Binding SettingsCommand}"
                 Text="Go back to Settings"
-                FontSize="15"
+                FontSize="18"
+                BackgroundColor="#512BD4"
+                TextColor="White"
                 HeightRequest="50"
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
                 CornerRadius="25"
-                Margin="0, 20" />
+                Margin="0, 20"/>
     </VerticalStackLayout>
 </ContentPage>

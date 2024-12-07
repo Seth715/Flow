@@ -18,7 +18,7 @@ namespace Flow.Models
         public string Color { get; set; }
 
         [Column("todo_item_id")]
-        public int? ToDoItemId { get; set; } // Nullable link to To-Do item if applicable
+        public int? ToDoItemId { get; set; }
 
         [Column("goal_item_id")]
         public int? GoalItemId { get; set; }

@@ -4,28 +4,76 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              x:Class="Flow.Views.HomePage"
              Title="Home">
-    <VerticalStackLayout>
-        <StackLayout Spacing="0">
+    <VerticalStackLayout Padding="20" Spacing="30" BackgroundColor="#F4F5FA">
+
+        <!-- Header Section -->
+        <StackLayout Spacing="5" BackgroundColor="#512BD4" Padding="15">
             <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{0:MMMM dd, yyyy}'}" 
                    FontSize="16"
                    FontAttributes="Bold"
-                   HorizontalOptions="Start"
-                   Margin="20,0"/>
-            
-            <Label Text="{Binding GreetingText}"
-                   FontSize="30"
+                   TextColor="White"
+                   HorizontalOptions="Start" />
+
+            <Label Text="{Binding GreetingText}" 
+                   FontSize="26"
                    FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Start" />
+
+            <Label Text="Time to Flow into Productivity!"
+                   FontSize="18"
+                   FontAttributes="Italic"
+                   TextColor="White"
                    HorizontalOptions="Start"
-                   Margin="20,0"/>
+                   Margin="0,5,0,0" />
         </StackLayout>
 
-        <Image Source="flow.png"
-               WidthRequest="175">
-        </Image>
+        <!-- Welcome Image -->
+        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Margin="10">
+            <Image Source="flow.png" WidthRequest="200" HeightRequest="200" />
+        </StackLayout>
 
-        <Label 
-            Text="Welcome to the Home Page!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <!-- Main Action Buttons -->
+        <VerticalStackLayout Spacing="20">
+            <Button
+                Command="{Binding CalendarCommand}"
+                Text="📅 View Calendar"
+                FontSize="22"
+                FontAttributes="Bold"
+                BackgroundColor="#6D83F2"
+                TextColor="White"
+                CornerRadius="10"
+                Padding="15"
+                HeightRequest="60"
+                HorizontalOptions="Fill" />
+
+            <HorizontalStackLayout Spacing="15" HorizontalOptions="Center">
+                <Button
+                    Command="{Binding TaskCommand}"
+                    Text="✔️ Add Task"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    BackgroundColor="#58C480"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Padding="10"
+                    HeightRequest="60"
+                    WidthRequest="150"
+                    HorizontalOptions="FillAndExpand" />
+
+                <Button
+                    Command="{Binding GoalCommand}"
+                    Text="🎯 Add Goal"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    BackgroundColor="#F77B72"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Padding="10"
+                    HeightRequest="60"
+                    WidthRequest="150"
+                    HorizontalOptions="FillAndExpand" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

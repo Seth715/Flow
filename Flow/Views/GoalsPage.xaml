@@ -3,66 +3,96 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Flow.Views.GoalsPage"
              xmlns:viewmodel="clr-namespace:Flow.ViewModels"
-             Title="Goals">
-    
-    <Grid RowDefinitions="50, Auto, Auto, *"
-         ColumnDefinitions=".75*, .25*"
-         Padding="10"
-         ColumnSpacing="10">
+             Title="Goals"
+             BackgroundColor="#F4F5FA"
+             Padding="20">
 
-        <!-- Entry for Task -->
-        <Entry Placeholder="Enter Goal"
-               Text="{Binding NewGoal}"  
-                Grid.Row="0"/>
+    <VerticalStackLayout Spacing="20">
+        <!-- Header -->
+        <StackLayout BackgroundColor="#512BD4" Padding="15" Spacing="5">
+            <Label Text="Your Goals"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+            <Label Text="Turn Your Dreams into Achievements"
+                   FontSize="16"
+                   FontAttributes="Italic"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+        </StackLayout>
 
-        <!-- Add Task Button -->
-        <Button Text="Add"
-                Command="{Binding AddGoalItemCommand}" 
-                Grid.Row="0"
-                Grid.RowSpan="2"
-                Grid.Column="1"
-                Margin="5"/>
+        <!-- Goal Input Section -->
+        <Grid RowDefinitions="Auto, Auto"
+              ColumnDefinitions="3*, 1*"
+              ColumnSpacing="10">
+            <!-- Entry for Goal -->
+            <Entry Placeholder="Enter Goal"
+                   Text="{Binding NewGoal}"
+                   BackgroundColor="White"
+                   FontSize="18"
+                   HeightRequest="50"
+                   Margin="0,10,0,0"
+                   Grid.Column="0" />
 
-        <!-- End Time Picker -->
+            <!-- Add Goal Button -->
+            <Button Text="Add"
+                    Command="{Binding AddGoalItemCommand}"
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    BackgroundColor="#512BD4"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="50"
+                    Grid.Column="1" />
+        </Grid>
+
+        <!-- End Date Picker -->
         <DatePicker Date="{Binding NewEndTime}"
-                    Grid.Row="1" 
-                    VerticalOptions="CenterAndExpand"/>
+                    BackgroundColor="White"
+                    FontSize="18"
+                    TextColor="#512BD4"
+                    Margin="0,10,0,0"/>
 
-        <!-- CollectionView for To-Do List -->
-        <CollectionView Grid.Row="2" Grid.ColumnSpan="2"
-                        ItemsSource="{Binding GoalItems}">
-
+        <!-- Goal Items List -->
+        <CollectionView ItemsSource="{Binding GoalItems}"
+                        Margin="0,10,0,0"
+                        BackgroundColor="White"
+                        MaximumHeightRequest="375">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <SwipeView>
+                        <!-- Swipe Actions -->
                         <SwipeView.RightItems>
-                            <SwipeItems>
-                                <!-- Delete Command -->
+                            <SwipeItems Mode="Execute">
+                                <!-- Delete Button -->
                                 <SwipeItem Text="Delete"
-                                          BackgroundColor="Red"
-                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GoalsPageViewModel}}, Path=DeleteCommand}"
-                                          CommandParameter="{Binding .}" />
-                                <!-- Pass the to-do item as the CommandParameter -->
+                                           BackgroundColor="Red"
+                                           Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:GoalsPageViewModel}}, Path=DeleteCommand}"
+                                           CommandParameter="{Binding .}" />
                             </SwipeItems>
                         </SwipeView.RightItems>
 
-                        <Grid Padding="0,5">
-                            <Frame>
+                        <!-- Goal Item Content -->
+                        <Grid Padding="10">
+                            <Frame CornerRadius="10"
+                                   BackgroundColor="#F4F5FA"
+                                   HasShadow="True"
+                                   BorderColor="#E0E0E0">
                                 <StackLayout>
-                                    <!-- Display End Time -->
-                                    <Label Text="{Binding EndTime, StringFormat='{0:MM/dd/yyyy}'}"
-                                           FontSize="14"/>
-                                    
-                                    <!-- Display Task Description -->
-                                    <Label Text="{Binding Goal}"  
-                                           FontSize="20"/>
+                                    <Label Text="{Binding Goal}"
+                                           FontSize="20"
+                                           FontAttributes="Bold"
+                                           TextColor="Black" />
+                                    <Label Text="{Binding EndTime, StringFormat='Due: {0:MM/dd/yyyy}'}"
+                                           FontSize="14"
+                                           TextColor="Gray" />
                                 </StackLayout>
                             </Frame>
                         </Grid>
-
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </Grid>
+    </VerticalStackLayout>
 </ContentPage>

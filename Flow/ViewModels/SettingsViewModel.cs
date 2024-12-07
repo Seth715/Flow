@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using Flow.Local_Database;
 using Flow.ViewModels;
 using Flow.Models;
+using CommunityToolkit.Maui.Views;
+using Flow.Views;
 
 namespace Flow.ViewModels
 {
@@ -19,7 +21,25 @@ namespace Flow.ViewModels
         [RelayCommand]
         async Task ViewDatabaseAsync()
         {
-            await Shell.Current.GoToAsync("//User_Database", true);
+            var popup = new AdminCredentialPopup();
+            var result = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+
+            if (result is bool success && success)
+            {
+                // Validate credentials
+                if (popup.EnteredUsername == "admin" && popup.EnteredPassword == "password") // Example check
+                {
+                    await Shell.Current.GoToAsync("//User_Database", true);
+                }
+                else if(popup.EnteredUsername == "admin" && popup.EnteredUsername != "password")
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Invalid Admin Password.", "OK");
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Invalid credentials.", "OK");
+                }
+            }
         }
 
         [RelayCommand]

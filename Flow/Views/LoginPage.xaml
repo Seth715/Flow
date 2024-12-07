@@ -1,56 +1,69 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Flow.Views.LoginPage">
-    <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Spacing="20" WidthRequest="300">
-        <Label 
-            Text="Login to Flow"
-            FontSize="36"
-            FontFamily="Lemon"
-            HorizontalOptions="Center"/>
+             x:Class="Flow.Views.LoginPage"
+             Title="Login">
 
+    <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Spacing="20" Padding="20" WidthRequest="320">
+
+        <!-- Page Title -->
+        <Label Text="Login to Flow"
+               FontSize="36"
+               FontFamily="Lemon"
+               HorizontalOptions="Center" />
+
+        <!-- Username Entry -->
         <Entry
             Text="{Binding Username}"
             Placeholder="Username"
             FontSize="16"
             VerticalOptions="Center" 
             HorizontalOptions="FillAndExpand" 
+            HeightRequest="50"
             Margin="0, 10"/>
 
+        <!-- Password Entry -->
         <Entry
             Text="{Binding Password}"
             Placeholder="Password"
             IsPassword="True"
             FontSize="16"
             VerticalOptions="Center" 
-            HorizontalOptions="FillAndExpand" 
+            HorizontalOptions="FillAndExpand"
+            HeightRequest="50"
             Margin="0, 10"/>
 
-        <Button
+        <!-- Login Button -->
+            <Button
             x:Name="LoginBtn"
             Command="{Binding LoginCommand}"
             Text="Login"
             FontSize="18"
             VerticalOptions="Center" 
-            HorizontalOptions="FillAndExpand"
+            WidthRequest="275"
             HeightRequest="50"
             CornerRadius="25"
-            Margin="0, 20"/>
-        
-        <Button
+            BackgroundColor="#512BD4"
+            TextColor="White"
+            Margin="0, 20">
+            </Button>
+
+        <!-- New User Button -->
+            <Button
             x:Name="NewUserBtn"
             Command="{Binding NewUserCommand}"
             Text="New User?"
             FontSize="16"
             BackgroundColor="Transparent"
             TextColor="#3b82f6"
-            VerticalOptions="Center" 
-            HorizontalOptions="FillAndExpand"
+            VerticalOptions="Center"
+            WidthRequest="275"
             HeightRequest="50"
             CornerRadius="25"
-            BorderColor="Black"
+            BorderColor="#3b82f6"
             BorderWidth="2"
-            Margin="0,10"/>
-        
+            Margin="0,10">
+            </Button>
+
     </VerticalStackLayout>
 </ContentPage>

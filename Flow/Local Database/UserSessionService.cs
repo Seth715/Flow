@@ -24,18 +24,7 @@ namespace Flow.Local_Database
             CurrentUserId = null;
         }
 
+        //boolean variable for if user is logged in
         public bool IsUserLoggedIn => CurrentUserId != null;
-
-        public static async Task<IEnumerable<ToDoItem>> GetToDoItemsForLoggedInUser()
-        {
-            int? userId = UserSessionService.Instance.CurrentUserId;
-            if (userId == null)
-            {
-                throw new InvalidOperationException("No user is currently logged in.");
-            }
-
-            // Delegates the call to LocalDBService to fetch to-do items for the current user
-            return await LocalDBService.GetToDoItemsForUser();
-        }
     }
 }

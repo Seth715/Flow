@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Flow.ViewModels"
@@ -5,28 +6,55 @@
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="local:CalendarViewModel"
              x:Class="Flow.Views.CalendarPage"
-             Title="Calendar">
+             Title="Calendar"
+             BackgroundColor="#F4F5FA">
 
-    <controls:Calendar
-              x:Name="calendar"
-              Events="{Binding Events}"
-              MonthLabelColor="#512BD4"
-              TodayOutlineColor="Black"
-              SelectedDayBackgroundColor="#512BD4"
-              SelectedDateColor="#512BD4"
-              EventIndicatorColor="#2B0B98"
-              EventIndicatorSelectedColor="#2B0B98"
-              SwipeToChangeMonthEnabled="True"
-              EventsScrollViewVisible="True"
-              ShowYearPicker="False"
-              Padding="5">
-        <controls:Calendar.EventTemplate>
-            <DataTemplate>
-                <StackLayout Padding="10,0,0,0">
-                    <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="Medium"/>
-                    <Label Text="{Binding Description}" FontSize="Small"/>
-                </StackLayout>
-            </DataTemplate>
-        </controls:Calendar.EventTemplate>
-    </controls:Calendar>
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <!-- Page Header -->
+        <StackLayout BackgroundColor="#512BD4" Padding="15" Spacing="5">
+            <Label Text="Your Calendar"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Stay on top of your schedule"
+                   FontSize="16"
+                   FontAttributes="Italic"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+        </StackLayout>
+
+        <!-- Calendar Component -->
+        <Frame BackgroundColor="White" CornerRadius="15" Padding="10" HasShadow="True">
+            <controls:Calendar
+                x:Name="calendar"
+                Events="{Binding Events}"
+                MonthLabelColor="#512BD4"
+                TodayOutlineColor="Black"
+                SelectedDayBackgroundColor="#512BD4"
+                SelectedDateColor="White"
+                EventIndicatorColor="#2B0B98"
+                EventIndicatorSelectedColor="#512BD4"
+                SwipeToChangeMonthEnabled="True"
+                EventsScrollViewVisible="True"
+                ShowYearPicker="False"
+                Padding="5">
+                <controls:Calendar.EventTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10,0,0,0">
+                            <Label Text="{Binding Title}" 
+                                   FontAttributes="Bold" 
+                                   FontSize="16"
+                                   TextColor="Black" />
+                            <Label Text="{Binding Description}" 
+                                   FontSize="14"
+                                   TextColor="Gray" />
+                        </StackLayout>
+                    </DataTemplate>
+                </controls:Calendar.EventTemplate>
+            </controls:Calendar>
+        </Frame>
+    </VerticalStackLayout>
 </ContentPage>

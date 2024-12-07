@@ -27,11 +27,39 @@ public partial class ProfilePage : ContentPage
             var user = await LocalDBService.GetUserById(userId.Value);
             if (user != null)
             {
-                UserIdLabel.Text = "User ID: " + user.Id;
-                NameLabel.Text = "Name: " + user.First_name + ' ' + user.Last_name;
-                UsernameLabel.Text = "Username: " + user.Username;
-                PasswordLabel.Text = "Password: " + user.Password;
+                UserIdLabel.FormattedText = new FormattedString
+                {
+                    Spans = {
+                    new Span { Text = "User ID: ", FontAttributes = FontAttributes.Bold },
+                    new Span { Text = user.Id.ToString() }
+                }
+                };
+
+                NameLabel.FormattedText = new FormattedString
+                {
+                    Spans = {
+                    new Span { Text = "Name: ", FontAttributes = FontAttributes.Bold },
+                    new Span { Text = user.First_name + " " + user.Last_name }
+                }
+                };
+
+                UsernameLabel.FormattedText = new FormattedString
+                {
+                    Spans = {
+                    new Span { Text = "Username: ", FontAttributes = FontAttributes.Bold },
+                    new Span { Text = user.Username }
+                }
+                };
+
+                PasswordLabel.FormattedText = new FormattedString
+                {
+                    Spans = {
+                    new Span { Text = "Password: ", FontAttributes = FontAttributes.Bold },
+                    new Span { Text = user.Password }
+                }
+                };
             }
         }
     }
+
 }

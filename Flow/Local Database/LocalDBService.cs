@@ -90,6 +90,7 @@ namespace Flow.Local_Database
 
             return await db.Table<ToDoItem>()
                            .Where(item => item.UserId == userId.Value)
+                           .OrderBy(item => item.EndTime)
                            .ToListAsync();
         }        
         public static async Task AddToDoItem(string task, DateTime endTime)
@@ -147,6 +148,7 @@ namespace Flow.Local_Database
 
             return await db.Table<GoalItem>()
                            .Where(item => item.UserId == userId.Value)
+                           .OrderBy(item => item.EndTime)
                            .ToListAsync();
         }
         public static async Task AddGoalItem(string goal, DateTime endTime)

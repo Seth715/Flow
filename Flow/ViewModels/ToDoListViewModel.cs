@@ -2,9 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Flow.Local_Database;
 using Flow.Models;
-using Microsoft.VisualBasic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 
 namespace Flow.ViewModels
 {
@@ -56,7 +54,6 @@ namespace Flow.ViewModels
 
                 var toDoItems = await LocalDBService.GetToDoItemsForUser();
 
-                
                 foreach (var item in toDoItems)
                 {
                     ToDoItems.Add(item);
