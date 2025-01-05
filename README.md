@@ -1,4 +1,6 @@
-This is my Senior Design Project for CS 4399!
+<p align="center">
+  <strong>Flow Mobile Application - UI Showcase</strong>
+</p>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/d1727ea4-66eb-4785-8a1a-e94a8fe9d58c" width="250">
